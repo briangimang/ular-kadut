@@ -1,0 +1,513 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: #070b16;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: #f0f7ff;
+
+    user-select: none;
+}
+
+
+/* =========================================================
+   GAME CONTAINER
+   ========================================================= */
+
+#game-container {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #070b16 0%,
+            #0c1422 100%
+        );
+}
+
+
+/* =========================================================
+   CANVAS
+   ========================================================= */
+
+#gameCanvas {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+}
+
+
+/* =========================================================
+   MAIN MENU
+   ========================================================= */
+
+.screen {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    z-index: 10;
+}
+
+
+#mainMenu {
+    padding-top: 11vh;
+}
+
+
+#mainMenu h1 {
+    position: relative;
+
+    font-size: clamp(
+        48px,
+        6vw,
+        78px
+    );
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: #5affaf;
+
+    text-shadow:
+        0 0 10px rgba(90, 255, 175, 0.45),
+        0 0 35px rgba(90, 255, 175, 0.25);
+}
+
+
+.subtitle {
+    margin-top: 12px;
+
+    font-size: 18px;
+
+    letter-spacing: 2px;
+
+    color: #8291aa;
+}
+
+
+.menu-high-score {
+    margin-top: 55px;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    color: #f0f7ff;
+}
+
+
+#menuHighScore {
+    color: #5affaf;
+}
+
+
+/* =========================================================
+   MENU BUTTON
+   ========================================================= */
+
+.menu-button {
+    width: min(280px, 70vw);
+
+    height: 65px;
+
+    margin-top: 25px;
+
+    border: 2px solid #46647d;
+
+    border-radius: 16px;
+
+    background: #19283c;
+
+    color: #f0f7ff;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s,
+        border-color 0.15s,
+        transform 0.1s,
+        box-shadow 0.15s;
+}
+
+
+.menu-button:hover {
+    background: #284159;
+
+    border-color: #5affaf;
+
+    box-shadow:
+        0 0 30px rgba(90, 255, 175, 0.18);
+
+    transform: translateY(-2px);
+}
+
+
+.menu-button:active {
+    background: #376453;
+
+    transform: translateY(3px);
+}
+
+
+.menu-controls {
+    position: absolute;
+
+    bottom: 48px;
+
+    font-size: 15px;
+
+    color: #5a6e87;
+
+    letter-spacing: 0.5px;
+}
+
+
+.version {
+    position: absolute;
+
+    left: 20px;
+
+    bottom: 25px;
+
+    font-size: 14px;
+
+    color: #3c4b5f;
+}
+
+
+/* =========================================================
+   GAME UI
+   ========================================================= */
+
+#gameUI {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 5;
+}
+
+
+.score-container {
+    position: absolute;
+
+    left: 25px;
+    top: 20px;
+}
+
+
+#score {
+    font-size: 30px;
+
+    font-weight: bold;
+
+    color: #f0f7ff;
+}
+
+
+#highScore {
+    margin-top: 7px;
+
+    margin-left: 3px;
+
+    font-size: 18px;
+
+    color: #8291aa;
+}
+
+
+.keyboard-info {
+    position: absolute;
+
+    top: 25px;
+    right: 25px;
+
+    font-size: 18px;
+
+    color: #64738c;
+}
+
+
+/* =========================================================
+   CONTROL PANEL
+   ========================================================= */
+
+#controlPanel {
+    position: absolute;
+
+    right: 45px;
+    bottom: 45px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 8px;
+
+    z-index: 20;
+}
+
+
+.horizontal-controls {
+    display: flex;
+
+    gap: 8px;
+}
+
+
+.direction-button {
+    width: 62px;
+    height: 62px;
+
+    border: 2px solid #46647d;
+
+    border-radius: 15px;
+
+    background: #19283c;
+
+    color: #f0f7ff;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 0 #03070e;
+
+    transition:
+        background 0.1s,
+        transform 0.08s,
+        box-shadow 0.08s;
+}
+
+
+.direction-button:hover {
+    background: #284159;
+
+    box-shadow:
+        0 0 25px rgba(
+            90,
+            255,
+            175,
+            0.25
+        );
+}
+
+
+.direction-button:active,
+.direction-button.pressed {
+    background: #376453;
+
+    transform: translateY(4px);
+
+    box-shadow:
+        0 1px 0 #03070e;
+}
+
+
+/* =========================================================
+   OVERLAY
+   ========================================================= */
+
+.overlay-screen {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 30;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(
+        3,
+        5,
+        12,
+        0.72
+    );
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+
+.overlay-content {
+    text-align: center;
+}
+
+
+.overlay-content h2 {
+    font-size: clamp(
+        48px,
+        6vw,
+        70px
+    );
+
+    color: #f0f7ff;
+
+    text-shadow:
+        0 0 25px rgba(
+            255,
+            255,
+            255,
+            0.15
+        );
+}
+
+
+.overlay-content p {
+    margin-top: 25px;
+
+    font-size: 18px;
+
+    color: #8291aa;
+}
+
+
+.game-over h2 {
+    color: #ff4669;
+
+    text-shadow:
+        0 0 25px rgba(
+            255,
+            70,
+            105,
+            0.3
+        );
+}
+
+
+.final-score {
+    margin-top: 30px;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    color: #f0f7ff;
+}
+
+
+.final-high-score {
+    margin-top: 10px;
+
+    font-size: 18px;
+
+    color: #8291aa;
+}
+
+
+.game-over .secondary {
+    margin-top: 8px;
+
+    color: #64738c;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    #mainMenu {
+        padding-top: 12vh;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+
+    .menu-high-score {
+        margin-top: 35px;
+
+        font-size: 23px;
+    }
+
+    .menu-button {
+        height: 58px;
+
+        font-size: 25px;
+    }
+
+    .menu-controls {
+        font-size: 11px;
+
+        bottom: 25px;
+    }
+
+    .version {
+        display: none;
+    }
+
+    .keyboard-info {
+        display: none;
+    }
+
+    #controlPanel {
+        right: 20px;
+        bottom: 20px;
+    }
+
+    .direction-button {
+        width: 54px;
+        height: 54px;
+
+        font-size: 25px;
+    }
+
+    #score {
+        font-size: 24px;
+    }
+
+    #highScore {
+        font-size: 15px;
+    }
+}
